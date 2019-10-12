@@ -1,0 +1,30 @@
+default: &default
+  adapter: postgresql
+  encoding: UTF8
+  pool: 500
+  username: ##
+  password: ##
+  pool: 5
+
+development:
+  <<: *default
+  host: ##
+  port: ###
+  database: ###
+
+staging:
+  <<: *default
+  host: ###
+  port: ##
+  database: ##
+
+test:
+  <<: *default
+  host: ###
+  port: ###
+  database: ###
+production:
+  <<: *default
+  host: ###
+  port: ###
+  database: ###
