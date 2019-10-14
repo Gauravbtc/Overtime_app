@@ -64,7 +64,7 @@ Rails.application.configure do
     g.test_framework :rspec
     g.controller_specs false
     g.request_specs true
-    g.helper_specs false
+    g.helper_specs true
     g.feature_specs true
     g.mailer_specs true
     g.model_specs true
