@@ -50,7 +50,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.8'
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '~> 4.7'
+  gem 'factory_girl_rails', '~> 4.9'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end

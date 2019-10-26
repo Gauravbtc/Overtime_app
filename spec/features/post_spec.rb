@@ -2,11 +2,10 @@ require 'rails_helper'
 
 describe 'navigate' do
   before do
-    @user = User.create(email: "test@yomail.com", password: "123456",
-             password_confirmation: "123456",first_name: "gaurav",
-             last_name: "Makwana")
+    @user = FactoryGirl.create(:user)
     login_as(@user, :scope => :user)
   end
+
   describe 'index' do
     before do
       visit posts_path
@@ -20,12 +19,11 @@ describe 'navigate' do
     end
 
     it "has list of posts" do
-      post1 = Post.create(date: Date.today, rational: "Post1",user_id: @user.id)
-      post2 = Post.create(date: Date.today, rational: "Post2",user_id: @user.id)
+      post1 = FactoryGirl.build_stubbed(:post)
+      post2 = FactoryGirl.build_stubbed(:secound_post)
       visit posts_path
-      expect(page).to have_content(/Post1/)
+      expect(page).to have_content(/testing|Some rational/)
     end
-
   end
 
   describe "creation" do
@@ -49,6 +47,24 @@ describe 'navigate' do
       fill_in 'post[rational]', with: "User Association"
       click_on "Save"
       expect(User.last.posts.last.rational).to have_content("User Association")
+    end
+  end
+  describe 'edit' do
+    before do
+      @post = FactoryGirl.create(:post)
+    end
+    it "can be reached by clicking on edit on index page" do
+      visit posts_path
+      click_link("edit_#{@post.id}")
+      expect(page.status_code).to eq(200)
+    end
+
+    it "can be edited" do
+      visit edit_post_path(@post)
+      fill_in 'post[date]' , with: Date.today
+      fill_in 'post[rational]', with: "Edit post"
+      click_on 'Save'
+      expect(page).to have_content("Edit post")
     end
   end
 end
