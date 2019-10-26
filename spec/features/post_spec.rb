@@ -49,6 +49,15 @@ describe 'navigate' do
       expect(User.last.posts.last.rational).to have_content("User Association")
     end
   end
+
+  describe 'new' do
+    it "has a link from home page" do
+      visit root_path
+      click_link("new_post_from_nav")
+      expect(page.status_code).to eq(200)
+    end
+  end
+
   describe 'edit' do
     before do
       @post = FactoryGirl.create(:post)
@@ -65,6 +74,15 @@ describe 'navigate' do
       fill_in 'post[rational]', with: "Edit post"
       click_on 'Save'
       expect(page).to have_content("Edit post")
+    end
+  end
+
+  describe 'delete' do
+    it "can be deleted" do
+      @post = FactoryGirl.create(:post)
+      visit posts_path
+      click_link("delete_post_#{@post.id}")
+      expect(page.status_code).to eq(200)
     end
   end
 end
