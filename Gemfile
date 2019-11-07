@@ -26,6 +26,7 @@ gem 'bootstrap'
 gem "gritter", "1.2.0"
 gem 'administrate', '~> 0.12.0'
 gem 'bourbon'
+gem 'pundit', '~> 2.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :post do
     date Date.today
-    rational "testing "
+    rational "testing"
     user
   end
 
@@ -10,4 +10,11 @@ FactoryGirl.define do
     rational "Some rational"
     user
   end
+
+  factory :post_from_other_user, class: "Post" do
+    date Date.yesterday
+    rational "Some rational"
+    non_authorized_user
+  end
+
 end
