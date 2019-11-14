@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'navigate' do
   let(:user) {FactoryGirl.create(:user) }
   let(:post) do
-    Post.create(date: Date.today, rational: "rational", user_id: user.id)
+    Post.create(date: Date.today, rational: "rational", user_id: user.id, overtime_request: 3.5)
   end
 
   before do
@@ -32,7 +32,7 @@ describe 'navigate' do
     it "has a scope so that post creator can see their posts" do
       other_user = User.create(first_name: "shiv", last_name: "Patel", email: "rhh@yopmail.com",
                                password: "123456", password_confirmation: "123456")
-      post_from_other_user = Post.create(date: Date.today, rational: "user can't see this post", user_id: other_user.id)
+      post_from_other_user = Post.create(date: Date.today, rational: "user can't see this post", user_id: other_user.id,overtime_request: 3.5)
       visit posts_path
       expect(page).to_not have_content(/user can't see this post/)
     end
@@ -50,15 +50,16 @@ describe 'navigate' do
     it "can be created from new form page" do
       fill_in 'post[date]' , with: Date.today
       fill_in 'post[rational]', with: "Some rational"
-      click_on 'Save'
-      expect(page).to have_content("Some rational")
+      fill_in 'post[overtime_request]', with: 4.5
+      expect{click_on 'Save'}.to change(Post, :count).by(1)
     end
 
     it "will have a user associated it" do
       fill_in 'post[date]' , with: Date.today
       fill_in 'post[rational]', with: "User Association"
+      fill_in 'post[overtime_request]', with: 4.5
       click_on "Save"
-      expect(User.last.posts.last.rational).to have_content("User Association")
+      expect(user.posts.last.rational).to have_content("User Association")
     end
   end
 
@@ -94,7 +95,7 @@ describe 'navigate' do
       delete_post_user = FactoryGirl.create(:user)
       login_as(delete_post_user, :scope => :user)
       delete_post = Post.create(date: Date.today, rational: "ad",
-       user_id: delete_post_user.id)
+       user_id: delete_post_user.id, overtime_request: 3.5)
       visit posts_path
       click_link("delete_post_#{delete_post.id}")
       expect(page.status_code).to eq(200)

@@ -1,1 +1,19 @@
-<%= @post.inspect %>
+<div>
+  <h2><%= @post.rational %></h2>
+</div>
+<div class= "card card-body bg-light">
+  <div>
+    <h3><span>Overtime Amount Requested:</span> <%= @post.overtime_request %></h3>
+  </div>
+  <div>
+    <h3><span>Employee:</span> <%= @post.user.full_name %></h3>
+  </div>
+  <div>
+    <h3><span>Date:</span> <%= @post.date %></h3>
+  </div>
+  <div>
+    <h3><span>Current Status of Approval:</span> <%= @post.status %></h3>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-primary post_edit_btn' if policy(@post).update? %>

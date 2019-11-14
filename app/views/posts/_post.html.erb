@@ -1,13 +1,18 @@
 <tr>
   <td><%= post.id %></td>
+  <td><%= post.overtime_request %></td>
   <td><%= post.date %></td>
   <td><%= post.user.full_name %></td>
-  <td><%= truncate(post.rational) %></td>
+  <td><%= link_to truncate(post.rational), post %></td>
+  <td><%= status_label post.status %> </td>
   <td>
-    <%= link_to "Edit", edit_post_path(post), id: "edit_#{post.id}" %>
+    <%= link_to "", edit_post_path(post), id: "edit_#{post.id}",
+    class: "fa fa-pencil index-icons" if policy(post).update? %>
   </td>
   <td>
-    <%= link_to "Delete", post_path(post), id: "delete_post_#{post.id}",
-     method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to "", post_path(post), id: "delete_post_#{post.id}",
+    class: 'fa fa-trash index-icons', method: :delete, data: {confirm: "Are you sure?"} %>
   </td>
 </tr>
+
+
