@@ -27,6 +27,9 @@ gem "gritter", "1.2.0"
 gem 'administrate', '~> 0.12.0'
 gem 'bourbon'
 gem 'pundit', '~> 2.1'
+gem 'twilio-ruby', '~> 5.29.1'
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
