@@ -26,6 +26,7 @@ class AdminUserDashboard < Administrate::BaseDashboard
     type: Field::String.with_options(searchable: false),
     created_at: Field::DateTime.with_options(searchable: false),
     updated_at: Field::DateTime.with_options(searchable: false),
+    phone: Field::String.with_options(searchable: false),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -46,6 +47,7 @@ class AdminUserDashboard < Administrate::BaseDashboard
   posts
   id
   email
+  phone
   encrypted_password
   reset_password_token
   reset_password_sent_at
@@ -71,6 +73,7 @@ class AdminUserDashboard < Administrate::BaseDashboard
   first_name
   last_name
   type
+  phone
   ].freeze
 
   # COLLECTION_FILTERS

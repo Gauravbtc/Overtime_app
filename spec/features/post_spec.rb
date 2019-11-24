@@ -30,8 +30,9 @@ describe 'navigate' do
     end
 
     it "has a scope so that post creator can see their posts" do
-      other_user = User.create(first_name: "shiv", last_name: "Patel", email: "rhh@yopmail.com",
-                               password: "123456", password_confirmation: "123456")
+      other_user = User.create(first_name: "shiv", last_name: "Patel",
+                               email: "rhh@yopmail.com",password: "123456",
+                               password_confirmation: "123456", phone: "555555555")
       post_from_other_user = Post.create(date: Date.today, rational: "user can't see this post", user_id: other_user.id,overtime_request: 3.5)
       visit posts_path
       expect(page).to_not have_content(/user can't see this post/)

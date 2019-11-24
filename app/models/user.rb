@@ -4,7 +4,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates_presence_of :first_name,:last_name
+  validates_presence_of :first_name, :last_name, :phone
+
+  PHONE_REGX = /\A^[0-9]*\Z/
+
+  validates_format_of :phone, with: PHONE_REGX
+  validates :phone, length: { is: 10 }
 
   def full_name
     first_name.upcase + ", " + last_name.upcase
