@@ -11,6 +11,10 @@
       <%= link_to "Time Entries", posts_path ,
       class: "nav-link #{active?(posts_path)}" %>
     </li>
+
+    <%= render "shared/audit_log" if policy(AuditLog).index? %>
+
+    <%# end %>
     <li class="nav-item">
       <%= link_to "Add New Entry", new_post_path ,
       class: "nav-link #{active?(new_post_path)}", id: 'new_post_from_nav'
