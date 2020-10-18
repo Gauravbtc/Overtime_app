@@ -48,4 +48,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install packages
         run: |
-          yarn install --pure-lockfile    
+          yarn install --pure-lockfile 
+      - name: Run test cases
+        run: |
+          rails db:prepare
+          bundle exec rspec            
