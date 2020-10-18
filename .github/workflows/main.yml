@@ -23,17 +23,6 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
-      - name: Build and run tests
-        env:
-          DATABASE_URL: postgres://postgres:@localhost:5423/test  
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
-        run: |
-          sudo apt-get -yqq install libpq-dev
-          gem install bundler -v 2.0.2
-          bundle install --jobs 4 --retry 3
-          rails db:prepare
-          bundle exec rails rspec
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -50,4 +39,15 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install packages
         run: |
-          yarn install --pure-lockfile         
+          yarn install --pure-lockfile    
+      - name: Build and run tests
+        env:
+          DATABASE_URL: postgres://postgres:@localhost:5423/test  
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          gem install bundler -v 2.0.2
+          bundle install --jobs 4 --retry 3
+          rails db:prepare
+          bundle exec rails rspec     
