@@ -32,6 +32,8 @@ jobs:
           sudo apt-get -yqq install libpq-dev
           gem install bundler -v 2.0.2
           bundle install --jobs 4 --retry 3
+          rails db:prepare
+          bundle exec rails rspec
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -48,8 +50,4 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install packages
         run: |
-          yarn install --pure-lockfile 
-      - name: Run test cases
-        run: |
-          rails db:prepare
-          bundle exec rspec            
+          yarn install --pure-lockfile         
